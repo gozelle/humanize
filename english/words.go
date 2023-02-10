@@ -4,8 +4,8 @@ package english
 import (
 	"fmt"
 	"strings"
-
-	humanize "github.com/dustin/go-humanize"
+	
+	humanize "github.com/gozelle/humanize"
 )
 
 // These are included because they are common technical terms.
@@ -36,13 +36,13 @@ func PluralWord(quantity int, singular, plural string) string {
 	if plural = specialPlurals[singular]; plural != "" {
 		return plural
 	}
-
+	
 	// We need to guess what the English plural might be.  Keep this
 	// function simple!  It doesn't need to know about every possiblity;
 	// only regular rules and the most common special cases.
 	//
 	// Reference: http://en.wikipedia.org/wiki/English_plural
-
+	
 	for _, ending := range sibilantEndings {
 		if strings.HasSuffix(singular, ending) {
 			return singular + "es"
@@ -55,7 +55,7 @@ func PluralWord(quantity int, singular, plural string) string {
 	if l >= 2 && singular[l-1] == 'y' && !isVowel[singular[l-2]] {
 		return singular[:l-1] + "ies"
 	}
-
+	
 	return singular + "s"
 }
 
